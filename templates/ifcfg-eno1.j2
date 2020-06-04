@@ -1,0 +1,19 @@
+TYPE="Ethernet"
+BOOTPROTO="none"
+DEFROUTE="yes"
+IPV4_FAILURE_FATAL="no"
+NAME="{{ ansible_default_ipv4.interface }}"
+DEVICE="{{ ansible_default_ipv4.interface }}"
+ONBOOT="yes"
+IPADDR="{{ ansible_default_ipv4.address }}"
+PREFIX={%- if '255.255.255.0' in ansible_default_ipv4.netmask -%}
+            "24"
+        {%- elif '255.255.254.0' in ansible_default_ipv4.netmask -%}
+            "23"
+        {%- elif '255.255.252.0' in ansible_default_ipv4.netmask -%}
+            "22"
+        {% endif %}
+
+GATEWAY="{{ ansible_default_ipv4.gateway }}"
+DNS1=8.8.8.8
+DNS2=8.8.4.4

@@ -1,0 +1,5 @@
+---
+# tasks file for base-vod
+
+- include_tasks: 01_install_deps.yml
+- include_tasks: 02_config_os.yml

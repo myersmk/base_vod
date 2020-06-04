@@ -1,0 +1,28 @@
+---
+# vars file for base-vod
+
+
+packages:
+    - https://www.elrepo.org/elrepo-release-8.el8.elrepo.noarch.rpm
+    - git
+    - wget
+    - vim
+    - tar
+    - curl
+    - epel-release
+    - python3
+    - python3-setuptools
+    - python3-pip
+    - python3-wheel
+    - youtube-dl
+    - jq
+    - nginx-all-modules
+    - transmission-daemon
+    - plexmediaserver
+    - ffmpeg-devel
+
+repo_enabled:
+    - { name: 'kernel-ml', repo: 'elrepo-kernel', gpg_check: 'yes' }
+    - { name: 'https://download1.rpmfusion.org/free/el/rpmfusion-free-release-8.noarch.rpm', repo: 'PowerTools', gpg_check: 'yes' }
+    - { name: 'https://download1.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-8.noarch.rpm', repo: 'PowerTools', gpg_check: 'no' }
+    - { name: 'http://rpmfind.net/linux/epel/7/x86_64/Packages/s/SDL2-2.0.10-1.el7.x86_64.rpm', repo: '', gpg_check: 'no' }
