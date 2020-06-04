@@ -30,5 +30,4 @@
 - name: Upgrade pip
   pip:
     name: pip
-    state: latest
    
