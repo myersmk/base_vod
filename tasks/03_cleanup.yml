@@ -1,7 +1,0 @@
----
-
-- name: git
-  git:
-    repo: https://github.com/myersmk/vod_server.git
-    dest: /etc/ansible/roles/base_vod
-    update: yes

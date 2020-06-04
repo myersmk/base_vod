@@ -1,0 +1,31 @@
+---
+
+
+# But first.... we gotta 
+# enable a few ports
+
+- name: ports for media 
+  firewalld:
+    service: "{{ item }}"
+    state: enabled
+    immediate: yes
+    permanent: true
+  loop:
+    - http
+    - plex
+    - transmission-daemon
+
+#- name: enable td port
+#  firewalld:
+#    port: 9091/tcp
+#    permanent: true
+
+- name: start yo engines fool
+  service:
+    name: "{{ item }}"
+    enabled: yes
+    state: started
+  with_items:
+    - nginx
+    - plexmediaserver
+    - transmission-daemon

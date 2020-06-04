@@ -1,0 +1,44 @@
+---
+
+- name: Create dirs
+  file:
+    path: "{{ item.path }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    state: directory
+  with_items:
+    - { path: '/var/cache/nginx', owner: 'nginx', group: 'nginx' }
+    - { path: /etc/transmission-daemon', owner: 'root', group: 'root' }
+
+- name: Copy firewalld configs
+  copy:
+    src: "{{ item.name }}"
+    dest: "{{ item.dst }}"
+  with_items:
+    - { name: 'plex.xml', dst: '/usr/lib/firewalld/services/'}
+    - { name: 'transmission-daemon.xml', dst: '/usr/lib/firewalld/services/'}
+    - { name: 'settings.json', dst: '/etc/transmission-daemon/'}
+  register: result
+
+- name: restart firewalld
+#shell: '/usr/bin/firewall-cmd --permanent --new-service-from-file=/usr/lib/firewalld/services/transmission-daemon.xml && systemctl reload firewalld'
+  systemd:
+    name: firewalld
+    state: restarted
+  when: result is changed
+
+- name: Copy nginx template
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+    owner: root
+    group: root
+    backup: yes
+
+- name: create fstab entry
+  mount:
+    path: /var/cache/nginx
+    src: tmpfs
+    fstype: tmpfs
+    opts: size=1024m
+    state: mounted

@@ -3,3 +3,5 @@
 
 - include_tasks: 01_install_deps.yml
 - include_tasks: 02_config_os.yml
+- include_tasks: 03_web_services.yml
+- include_tasks: 04_start_shit_up.yml

@@ -35,6 +35,8 @@ packages:
     - transmission-daemon
     - plexmediaserver
     - ffmpeg-devel
+    - htop
+    - net-tools
 
 repo_enabled:
     - { name: 'kernel-ml', repo: 'elrepo-kernel', gpg_check: 'yes' }

@@ -36,6 +36,8 @@ http {
     # for more information.
     include /etc/nginx/conf.d/*.conf;
 
+    proxy_cache_path /var/cache/nginx keys_zone=vod_cache:10m inactive=1d;
+
     server {
         listen       80 default_server;
         server_name  _;
@@ -46,7 +48,11 @@ http {
 
         location / {
             autoindex on;
-
+            proxy_cache vod_cache;
+            proxy_cache_key "$host$request_uri$http_authorization";
+            proxy_cache_valid 404, 302, 1m;
+            proxy_cache_valid 200 1d;
+            add_header X-Cache-Status $upstream_cache_status;
         }
     }
 }
