@@ -25,7 +25,7 @@
 - name: Install packages
   dnf:
     name: "{{ packages }}"
-    state: latest
+    state: present
 
 - name: Upgrade pip
   pip:
