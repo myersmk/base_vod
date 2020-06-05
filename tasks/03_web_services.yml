@@ -10,6 +10,18 @@
     - { path: '/var/cache/nginx', owner: 'nginx', group: 'nginx' }
     - { path: /etc/transmission-daemon', owner: 'root', group: 'root' }
 
+- name: Create dirs
+  file:
+    path: "/data/vod/{{ item.path }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    state: directory
+  with_items:
+    - { path: 'media', owner: 'root', group: 'root' }
+    - { path: 'td', owner: 'root', group: 'root' }
+    - { path: 'scripts', owner: 'root', group: 'root' }
+    - { path: 'text', owner: 'root', group: 'root' }
+
 - name: Copy firewalld configs
   copy:
     src: "{{ item.name }}"
