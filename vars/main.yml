@@ -37,6 +37,7 @@ packages:
     - ffmpeg-devel
     - htop
     - net-tools
+    - yum-utils
 
 repo_enabled:
     - { name: 'kernel-ml', repo: 'elrepo-kernel', gpg_check: 'yes' }

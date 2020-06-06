@@ -18,7 +18,10 @@
     state: directory
   with_items:
     - { path: 'media', owner: 'root', group: 'root' }
-    - { path: 'td', owner: 'root', group: 'root' }
+    - { path: 'docker', owner: 'root', group: 'root' }
+    - { path: 'td', owner: 'transmission', group: 'transmission' }
+    - { path: 'td/download', owner: 'transmission', group: 'transmission' }
+    - { path: 'td/incomplete', owner: 'transmission', group: 'transmission' }
     - { path: 'scripts', owner: 'root', group: 'root' }
     - { path: 'text', owner: 'root', group: 'root' }
 
@@ -29,7 +32,7 @@
   with_items:
     - { name: 'plex.xml', dst: '/usr/lib/firewalld/services/'}
     - { name: 'transmission-daemon.xml', dst: '/usr/lib/firewalld/services/'}
-    - { name: 'settings.json', dst: '/etc/transmission-daemon/'}
+    - { name: 'settings.json', dst: '/var/lib/transmission/.config/transmission-daemon/'}
   register: result
 
 - name: restart firewalld

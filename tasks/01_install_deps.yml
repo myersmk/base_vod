@@ -1,9 +1,11 @@
 ---
 
-- name: Install elrepo for kernel upgrade
+- name: Install elrepo for kernel upgrade / docker
   rpm_key:
     state: present
-    key: https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
+    key: "{{ item }}"
+  with_items:
+    - https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
 
 - name: Add plex repo
   yum_repository:
@@ -13,6 +15,11 @@
     description: Plex
     enabled: yes
     gpgcheck: yes
+
+- name: Add docker repo
+  copy:
+    src: docker-ce.repo
+    dest: /etc/yum.repos.d/
 
 - name: Adding ffmpeg and kernel deps
   dnf:
@@ -26,6 +33,15 @@
   dnf:
     name: "{{ packages }}"
     state: present
+
+- name: Install docker engine
+  dnf:
+    name: "{{ item }}"
+    enablerepo: docker-ce-nightly
+  with_items:
+    - https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.13-3.2.el7.x86_64.rpm
+    - docker-ce
+    - docker-ce-cli
 
 - name: Upgrade pip
   pip:

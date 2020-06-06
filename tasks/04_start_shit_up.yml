@@ -15,10 +15,10 @@
     - plex
     - transmission-daemon
 
-#- name: enable td port
-#  firewalld:
-#    port: 9091/tcp
-#    permanent: true
+- name: enable td port
+  firewalld:
+    port: 9091/tcp
+    permanent: true
 
 - name: start yo engines fool
   service:
