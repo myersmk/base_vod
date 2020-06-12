@@ -41,6 +41,3 @@
     mode: '0644'
     backup: yes
   register: result
-
-
-

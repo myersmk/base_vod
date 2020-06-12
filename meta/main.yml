@@ -1,6 +1,6 @@
 galaxy_info:
   author: Matthew Myers
-  description: Setup base system I like for plex
+  description: Setup base vod system
   company: None
 
   # If the issue tracker for your role is not on github, uncomment the
@@ -28,7 +28,7 @@ galaxy_info:
   # https://galaxy.ansible.com/api/v1/platforms/
   #
   platforms:
-    - name: Fedora
+    - name: Centos
       versions:
         - 8
   #   - 25
