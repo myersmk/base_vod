@@ -19,6 +19,7 @@
   firewalld:
     port: 9091/tcp
     permanent: true
+    state: enabled
 
 - name: start yo engines fool
   service:

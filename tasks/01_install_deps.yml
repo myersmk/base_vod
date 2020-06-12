@@ -46,4 +46,11 @@
 - name: Upgrade pip
   pip:
     name: pip
+
+- name: Install py packages
+  pip:
+    name: "{{ item }}"
+  with_items:
+    - requests
+    - bs4
    
